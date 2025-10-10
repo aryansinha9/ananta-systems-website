@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agree to Privacy Policy - Ananta Systems</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body class="bg-slate-50 font-sans text-slate-700">
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-slate-800">Ananta Systems</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-12 md:py-20">
+        <div class="max-w-2xl mx-auto bg-white p-8 md:p-12 rounded-lg shadow-md text-center">
+            
+            <h1 class="text-3xl font-bold text-slate-900 mb-4">One Last Step</h1>
+            <p class="text-slate-600 mb-8">Please review and agree to our Privacy Policy before proceeding with your payment.</p>
+
+            <!-- Link to the full policy -->
+            <div class="mb-8">
+                <a href="privacy-policy.html" target="_blank" class="text-violet-600 hover:underline font-semibold">
+                    Read the Full Privacy Policy Here
+                </a>
+                <p class="text-xs text-slate-400 mt-1">(This will open in a new tab)</p>
+            </div>
+            
+            <!-- Checkbox for agreement -->
+            <div class="flex items-center justify-center space-x-3 mb-10">
+                <input type="checkbox" id="agreeCheckbox" class="h-5 w-5 rounded border-gray-300 text-violet-600 focus:ring-violet-500">
+                <label for="agreeCheckbox" class="font-medium text-slate-800">I have read and agree to the Privacy Policy.</label>
+            </div>
+
+            <!-- Payment Button -->
+            <button id="paymentButton" 
+                    class="w-full bg-slate-400 text-white font-bold py-3 px-4 rounded-lg cursor-not-allowed transition-colors duration-300" 
+                    disabled>
+                Proceed to Payment
+            </button>
+            
+        </div>
+    </main>
+    
+    <script>
+        // --- IMPORTANT: PASTE YOUR STRIPE LINK BELOW ---
+        const stripePaymentLink = "https://buy.stripe.com/00wbJ3fatedye1Z3xh4ko04"; 
+        
+        // Get the elements
+        const agreeCheckbox = document.getElementById('agreeCheckbox');
+        const paymentButton = document.getElementById('paymentButton');
+
+        // Listen for changes on the checkbox
+        agreeCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+                // If checked, enable the button
+                paymentButton.disabled = false;
+                paymentButton.classList.remove('bg-slate-400', 'cursor-not-allowed');
+                paymentButton.classList.add('bg-violet-600', 'hover:bg-violet-700');
+            } else {
+                // If unchecked, disable the button
+                paymentButton.disabled = true;
+                paymentButton.classList.remove('bg-violet-600', 'hover:bg-violet-700');
+                paymentButton.classList.add('bg-slate-400', 'cursor-not-allowed');
+            }
+        });
+
+        // Listen for clicks on the payment button
+        paymentButton.addEventListener('click', function() {
+            // Only redirects if the button is not disabled
+            if (!this.disabled) {
+                window.location.href = stripePaymentLink;
+            }
+        });
+    </script>
+
+</body>
+</html>
